@@ -31,6 +31,9 @@ struct HeadlinesView: View {
     @State
     private var category: Category = .initCase
     
+    @State
+    private var isCachedOnLaunch = false
+    
     init() {
         
         topHeadlinesFetchRequest = FetchRequest(
@@ -54,13 +57,19 @@ struct HeadlinesView: View {
                     ArticleCardView(article: article)
                     
                 }
+                .refreshable {
+                    cache(category: Category.business)
+                }
                 
             }
             
         }
         .navigationTitle("Headlines")
         .onAppear {
-            cache(category: Category.business)
+            if !isCachedOnLaunch {
+                isCachedOnLaunch.toggle()
+                cache(category: Category.business)
+            }
         }
     }
     

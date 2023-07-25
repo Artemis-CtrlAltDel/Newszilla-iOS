@@ -10,7 +10,7 @@ import SDWebImageSwiftUI
 
 struct ArticleCardView: View {
     
-    var article: Article
+    let article: Article
     
     @Environment(\.managedObjectContext)
     private var viewContext
@@ -25,7 +25,7 @@ struct ArticleCardView: View {
         
         VStack {
             
-            VStack {
+            NavigationLink(destination: ArticleDetailsView(article: article, isSaved: isSaved)) {
                 
                 HStack {
                     
@@ -67,42 +67,20 @@ struct ArticleCardView: View {
                 
             }
             
-            VStack {
-                
-                Divider()
-                
-                HStack {
-                    
-                    VStack {
-                        Button {
-                            share(url: article.url ?? "url")
-                        } label: {
-                            Image(systemName: "link")
-                                .padding(5)
-                                .background(Color.accentSurface)
-                                .clipShape(Circle())
-                        }
-                        .padding(.trailing, 5)
+            Divider()
+            
+            HStack {
+                // TODO re-position this sharing feature.
+                Image(systemName: "link")
+                    .padding(5)
+                    .background(Color.accentSurface)
+                    .clipShape(Circle())
+                    .onTapGesture {
+                        share(url: article.url ?? "url")
                     }
-                    
-                    VStack {
-                        
-                        Button {
-                            print(article.isSaved)
-                            article.isSaved.toggle()
-                        } label: {
-                            Image(systemName: article.isSaved ? "bookmark.fill" : "bookmark")
-                                .padding(5)
-                                .background(Color.accentSurface)
-                                .clipShape(Circle())
-                        }
-                        
-                    }
-                    
-                }
-                .frame(maxWidth: .infinity, alignment: .trailing)
                 
             }
+            .frame(maxWidth: .infinity, alignment: .trailing)
             
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -111,6 +89,15 @@ struct ArticleCardView: View {
             }) {
                 Image(systemName: "trash")
             }
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            Button {
+                save(article: self.article)
+            } label: {
+                (self.article.isSaved || self.isSaved) ? Image(systemName: "minus.circle") : Image(systemName: "arrow.down.circle")
+            }
+            .tint((self.article.isSaved || self.isSaved) ? .orange : .blue)
+
         }
         
     }
@@ -125,5 +112,12 @@ struct ArticleCardView: View {
             window.rootViewController?.present(av, animated: true, completion: nil)
             
         }
+    }
+    
+    private func save(article: Article) {
+        
+        isSaved.toggle()
+        article.isSaved = isSaved
+        print(article.isSaved)
     }
 }

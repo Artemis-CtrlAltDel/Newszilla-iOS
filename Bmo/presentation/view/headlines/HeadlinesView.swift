@@ -64,7 +64,6 @@ struct HeadlinesView: View {
             }
             
         }
-        .navigationTitle("Headlines")
         .onAppear {
             if !isCachedOnLaunch {
                 isCachedOnLaunch.toggle()

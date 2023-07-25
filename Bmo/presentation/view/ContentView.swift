@@ -16,16 +16,19 @@ struct ContentView: View {
             
             TabView {
                 HeadlinesView()
+                    .navigationTitle("Headlines")
                     .tabItem {
                         Image(systemName: "square.topthird.inset.filled")
                         Text("Headlines")
                     }
                 Text("News Screen")
+                    .navigationTitle("News")
                     .tabItem {
                         Image(systemName: "network")
                         Text("News")
                     }
                 Text("Library Screen")
+                    .navigationTitle("Library")
                     .tabItem {
                         Image(systemName: "bookmark.fill")
                         Text("Library")

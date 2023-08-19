@@ -46,15 +46,6 @@ struct HeadlinesView: View {
         
         VStack {
             
-            Picker("Category", selection: $category) {
-                ForEach(Category.allCases) { category in
-                    Text(category.rawValue.capitalized)
-                }
-            }
-            .onChange(of: category) { newCategory in
-                onCategoryChange(category: newCategory)
-            }
-            
             if topHeadlinesList.isEmpty {
                 Text("no data")
             }
@@ -70,6 +61,16 @@ struct HeadlinesView: View {
                     cache(category: category)
                 }
                 
+                Picker("Category", selection: $category) {
+                    ForEach(Category.allCases) { category in
+                        Text(category.rawValue.capitalized)
+                    }
+                }
+                .padding()
+                .onChange(of: category) { newCategory in
+                    onCategoryChange(category: newCategory)
+                }
+                
             }
             
         }
@@ -79,6 +80,7 @@ struct HeadlinesView: View {
                 cache(category: category)
             }
         }
+        
     }
     
     private func cache(category: Category) {

@@ -31,8 +31,6 @@ enum Category: String, CaseIterable, Identifiable {
     case sports = "sports"
     case technology = "technology"
     
-    case initCase
-    
     var id: Self {
         self
     }

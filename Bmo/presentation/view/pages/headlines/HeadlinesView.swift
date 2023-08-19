@@ -29,7 +29,7 @@ struct HeadlinesView: View {
     private var sortBy: SortBy = .initCase
     
     @State
-    private var category: Category = .initCase
+    private var category: Category = .business
     
     @State
     private var isCachedOnLaunch = false
@@ -46,6 +46,15 @@ struct HeadlinesView: View {
         
         VStack {
             
+            Picker("Category", selection: $category) {
+                ForEach(Category.allCases) { category in
+                    Text(category.rawValue.capitalized)
+                }
+            }
+            .onChange(of: category) { newCategory in
+                onCategoryChange(category: newCategory)
+            }
+            
             if topHeadlinesList.isEmpty {
                 Text("no data")
             }
@@ -58,7 +67,7 @@ struct HeadlinesView: View {
                     
                 }
                 .refreshable {
-                    cache(category: Category.business)
+                    cache(category: category)
                 }
                 
             }
@@ -67,14 +76,18 @@ struct HeadlinesView: View {
         .onAppear {
             if !isCachedOnLaunch {
                 isCachedOnLaunch.toggle()
-                cache(category: Category.business)
+                cache(category: category)
             }
         }
     }
     
     private func cache(category: Category) {
-        self.category = category
         viewModel.cacheTopHeadlines(context: viewContext, category: category)
+    }
+    
+    private func onCategoryChange(category: Category) {
+        viewModel.truncateHeadlines(context: viewContext, topHeadlinesList: topHeadlinesList)
+        cache(category: category)
     }
     
 }

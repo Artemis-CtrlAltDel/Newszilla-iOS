@@ -23,9 +23,9 @@ struct ArticleCardView: View {
     
     var body: some View {
         
-        VStack {
+        NavigationLink(destination: ArticleDetailsView(article: article, isSaved: isSaved)) {
             
-            NavigationLink(destination: ArticleDetailsView(article: article, isSaved: isSaved)) {
+            VStack {
                 
                 HStack {
                     
@@ -67,21 +67,6 @@ struct ArticleCardView: View {
                 
             }
             
-            Divider()
-            
-            HStack {
-                // TODO re-position this sharing feature.
-                Image(systemName: "link")
-                    .padding(5)
-                    .background(Color.accentSurface)
-                    .clipShape(Circle())
-                    .onTapGesture {
-                        share(url: article.url ?? "url")
-                    }
-                
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button(role: .destructive, action: {
@@ -97,6 +82,15 @@ struct ArticleCardView: View {
                 (self.article.isSaved || self.isSaved) ? Image(systemName: "minus.circle") : Image(systemName: "arrow.down.circle")
             }
             .tint((self.article.isSaved || self.isSaved) ? .orange : .blue)
+
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+            Button {
+                share(url: article.url ?? "")
+            } label: {
+                Image(systemName: "link")
+            }
+            .tint(.gray)
 
         }
         

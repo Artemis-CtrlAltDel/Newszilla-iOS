@@ -67,6 +67,15 @@ class ViewModel: ObservableObject {
         save(context: context)
     }
     
+    func truncateHeadlines(context: NSManagedObjectContext, topHeadlinesList: FetchedResults<Article>) {
+        
+        for result in topHeadlinesList {
+            context.delete(result)
+        }
+        
+        save(context: context)
+    }
+    
     private func save(context: NSManagedObjectContext) {
         do {
             try context.save()

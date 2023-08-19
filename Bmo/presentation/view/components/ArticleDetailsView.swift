@@ -68,7 +68,6 @@ struct ArticleDetailsView: View {
                                 .font(.headline)
                                 .foregroundColor(.blue)
                         }
-                        .modifier(AlignHLeading())
                         .padding(.top, 1)
 
                     }

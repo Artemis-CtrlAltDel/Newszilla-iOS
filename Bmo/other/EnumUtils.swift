@@ -22,7 +22,7 @@ enum SortBy: String {
     case initCase
 }
 
-enum Category: String {
+enum Category: String, CaseIterable, Identifiable {
     case business = "business"
     case entertainment = "entertainment"
     case general = "general"
@@ -32,4 +32,8 @@ enum Category: String {
     case technology = "technology"
     
     case initCase
+    
+    var id: Self {
+        self
+    }
 }

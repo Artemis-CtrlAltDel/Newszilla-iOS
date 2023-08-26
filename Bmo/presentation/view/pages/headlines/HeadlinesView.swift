@@ -53,8 +53,11 @@ struct HeadlinesView: View {
                 List(topHeadlinesList) { article in
                     
                     ArticleCardView(article: article)
+                        .listRowSeparator(.hidden)
+                        .padding(.bottom)
                     
                 }
+                .listStyle(.plain)
                 .refreshable {
                     cache(category: category)
                 }
@@ -90,10 +93,4 @@ struct HeadlinesView: View {
         cache(category: category)
     }
     
-}
-
-struct HeadlinesView_Previews: PreviewProvider {
-    static var previews: some View {
-        HeadlinesView()
-    }
 }

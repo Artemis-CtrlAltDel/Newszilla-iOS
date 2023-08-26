@@ -57,6 +57,7 @@ struct EverythingView: View {
                     
                     ArticleCardView(article: article)
                         .listRowSeparator(.hidden)
+                        .padding(.bottom)
                     
                 }
                 .listStyle(.plain)

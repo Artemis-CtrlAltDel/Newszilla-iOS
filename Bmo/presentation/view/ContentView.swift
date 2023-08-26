@@ -21,13 +21,13 @@ struct ContentView: View {
                         Image(systemName: "square.topthird.inset.filled")
                         Text("Headlines")
                     }
-                Text("News Screen")
+                EverythingView()
                     .navigationTitle("News")
                     .tabItem {
                         Image(systemName: "network")
                         Text("News")
                     }
-                Text("Library Screen")
+                LibraryView()
                     .navigationTitle("Library")
                     .tabItem {
                         Image(systemName: "bookmark.fill")

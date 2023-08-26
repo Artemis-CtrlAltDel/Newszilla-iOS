@@ -15,9 +15,9 @@ class ViewModel: ObservableObject {
     private let api = NewsApi()
     private let locationManager = PermsUtils.Location()
     
-    private func getCountryCode() -> String? {
+    private func getCountryCode() -> String {
         
-        var countryCode: String? = nil
+        var countryCode: String?
         
         if locationManager.locationManagerDidChangeAuthorization() {
             countryCode = Locale.current
@@ -27,18 +27,34 @@ class ViewModel: ObservableObject {
                 .lowercased(with: Locale.current)
         }
         
-        return countryCode
+        return countryCode ?? "us"
+    }
+    
+    private func getLanguageCode() -> String {
+        
+        return Locale.current.language.languageCode?.identifier ?? "en"
+        
     }
     
     func cacheTopHeadlines(context: NSManagedObjectContext, category: Category) {
         
-        let country = getCountryCode() ?? "us"
+        let country = getCountryCode()
         
         api.getTopHeadlines(for: country, category: category) { articles in
             for article in articles {
                 self.insert(context: context, response: article)
             }
         }
+    }
+    
+    func cacheEverything(context: NSManagedObjectContext, q: String, language: Language) {
+        
+        api.getEverything(for: q, language: language) { articles in
+            for article in articles {
+                self.insert(context: context, response: article)
+            }
+        }
+        
     }
     
     private func insert(context: NSManagedObjectContext, response: Response) {
@@ -70,6 +86,15 @@ class ViewModel: ObservableObject {
     func truncateHeadlines(context: NSManagedObjectContext, topHeadlinesList: FetchedResults<Article>) {
         
         for result in topHeadlinesList {
+            context.delete(result)
+        }
+        
+        save(context: context)
+    }
+    
+    func truncateEverything(context: NSManagedObjectContext, everythingList: FetchedResults<Article>) {
+        
+        for result in everythingList {
             context.delete(result)
         }
         

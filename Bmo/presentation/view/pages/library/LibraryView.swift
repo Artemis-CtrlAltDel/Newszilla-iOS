@@ -8,13 +8,40 @@
 import SwiftUI
 
 struct LibraryView: View {
+    
+    private let libraryFetchRequest: FetchRequest<Article>
+    private var libraryList: FetchedResults<Article> {
+        libraryFetchRequest.wrappedValue
+    }
+    
+    @Environment(\.managedObjectContext)
+    private var viewContext
+    
+    @EnvironmentObject
+    private var viewModel: ViewModel
+    
+    init() {
+        
+        libraryFetchRequest = FetchRequest(
+            sortDescriptors: [NSSortDescriptor(key: "publishedAt", ascending: false)]
+        )
+        
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        let categorizedLibraryList = libraryList.reduce(into: [String: [Article]]()) { partialResult, article in
+            
+            if let category = article.category {
+                
+                partialResult[category]!.append(article)
+                
+            }
+            
+        }
+        
+        Text(categorizedLibraryList.count.formatted())
+        
     }
-}
-
-struct LibraryView_Previews: PreviewProvider {
-    static var previews: some View {
-        LibraryView()
-    }
+    
 }

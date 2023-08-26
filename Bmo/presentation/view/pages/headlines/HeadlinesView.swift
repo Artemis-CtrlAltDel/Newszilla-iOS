@@ -9,8 +9,6 @@ import SwiftUI
 
 struct HeadlinesView: View {
     
-    private let api = NewsApi()
-    
     private var topHeadlinesFetchRequest: FetchRequest<Article>
     private var topHeadlinesList: FetchedResults<Article> {
         topHeadlinesFetchRequest.wrappedValue

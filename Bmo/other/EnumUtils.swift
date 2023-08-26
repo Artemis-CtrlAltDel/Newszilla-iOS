@@ -35,3 +35,18 @@ enum Category: String, CaseIterable, Identifiable {
         self
     }
 }
+
+enum Language: String, CaseIterable, Identifiable {
+    case arabic = "ar"
+    case deutsh = "de"
+    case english = "en"
+    case spanish = "es"
+    case french = "fr"
+    case italian = "it"
+    case russian = "ru"
+    case salvador = "sv"
+    
+    var id: Self {
+        self
+    }
+}

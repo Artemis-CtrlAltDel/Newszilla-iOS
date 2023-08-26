@@ -33,6 +33,7 @@
 		3ABBA7322A600BFF00392F64 /* NewsApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABBA7312A600BFF00392F64 /* NewsApiProtocol.swift */; };
 		3AC644E52A6059E300145F17 /* ArticleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC644E42A6059E300145F17 /* ArticleCardView.swift */; };
 		3AC644E72A605A6200145F17 /* ArticleDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC644E62A605A6200145F17 /* ArticleDetailsView.swift */; };
+		3AE5245C2A9A3B9C00B4B02D /* EverythingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE5245B2A9A3B9C00B4B02D /* EverythingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		3ABBA7312A600BFF00392F64 /* NewsApiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApiProtocol.swift; sourceTree = "<group>"; };
 		3AC644E42A6059E300145F17 /* ArticleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCardView.swift; sourceTree = "<group>"; };
 		3AC644E62A605A6200145F17 /* ArticleDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsView.swift; sourceTree = "<group>"; };
+		3AE5245B2A9A3B9C00B4B02D /* EverythingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EverythingView.swift; path = Bmo/presentation/view/pages/library/EverythingView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 		3AC644DD2A60565E00145F17 /* everything */ = {
 			isa = PBXGroup;
 			children = (
+				3AE5245B2A9A3B9C00B4B02D /* EverythingView.swift */,
 			);
 			name = everything;
 			path = ../everything;
@@ -445,6 +448,7 @@
 				3A98750B2A8A774C00B96664 /* LibraryView.swift in Sources */,
 				3A0F4FEB2A5EFFC300C9A971 /* NewsApi.swift in Sources */,
 				3A0F4FA72A5EDF5200C9A971 /* BmoApp.swift in Sources */,
+				3AE5245C2A9A3B9C00B4B02D /* EverythingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

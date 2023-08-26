@@ -14,4 +14,10 @@ protocol NewsApiProtocol {
         category: Category,
         continuation: @escaping ([Response]) -> Void
     )
+    
+    func getEverything(
+        for q: String,
+        language: Language,
+        continuation: @escaping ([Response]) -> Void
+    )
 }

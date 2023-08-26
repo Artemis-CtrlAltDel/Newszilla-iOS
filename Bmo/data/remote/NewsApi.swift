@@ -92,4 +92,23 @@ class NewsApi: NewsApiProtocol {
         }
         
     }
+    
+    func getEverything(
+        for q: String,
+        language: Language,
+        continuation: @escaping ([Response]) -> Void)
+    {
+        
+        newsType = .everything
+        let url = URL(string: "\(Constants.BASE_URL)/\(newsType.rawValue)?apiKey=\(Constants.API_KEY)&q=\(q)&language=\(language.rawValue)")!
+        
+        taskGetNews(with: url) { articles in
+            
+            continuation(
+                articles
+            )
+            
+        }
+        
+    }
 }

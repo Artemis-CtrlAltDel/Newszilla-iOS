@@ -27,11 +27,3 @@ struct CategoryPackageView: View {
         
     }
 }
-
-struct CategoryPackageView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryPackageView(
-            articlesGroupedByCategory: []
-        )
-    }
-}
